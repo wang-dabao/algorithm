@@ -20,18 +20,6 @@ package main
 // 题目数据保证列表表示的数字不含前导零
 // Related Topics 递归 链表 数学
 
-/**
-* Definition for singly-linked list.
-* type ListNode struct {
-*     Val int
-*     Next *ListNode
-* }
-*/
-
-type ListNode struct {
-	Val int
-	Next *ListNode
-}
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	//思路：循环递归，把每个连链表的首节点拿出来，做加法，进位用index存储起来，参与下一位的运算。这里主要是链表的一个输出，用一个tag指针纸箱结果链表，一次一次移动，直到最后
 	var result *ListNode

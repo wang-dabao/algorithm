@@ -1,4 +1,7 @@
 package main
+
+import algorithm "algorithm/const"
+
 //给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。
 //
 // 请你将两个数相加，并以相同形式返回一个表示和的链表。
@@ -20,10 +23,10 @@ package main
 // 题目数据保证列表表示的数字不含前导零
 // Related Topics 递归 链表 数学
 
-func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+func addTwoNumbers(l1 *algorithm.ListNode, l2 *algorithm.ListNode) *algorithm.ListNode {
 	//思路：循环递归，把每个连链表的首节点拿出来，做加法，进位用index存储起来，参与下一位的运算。这里主要是链表的一个输出，用一个tag指针纸箱结果链表，一次一次移动，直到最后
-	var result *ListNode
-	var tag *ListNode
+	var result *algorithm.ListNode
+	var tag *algorithm.ListNode
 	index := 0
 	for l1 != nil || l2 != nil {
 		l1Value := 0
@@ -39,15 +42,15 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		v := (l1Value + l2Value + index) % 10
 		index = (l1Value + l2Value + index) / 10
 		if result == nil {
-			result = &ListNode{Val: v}
+			result = &algorithm.ListNode{Val: v}
 			tag = result
 		}else {
-			tag.Next = &ListNode{Val: v}
+			tag.Next = &algorithm.ListNode{Val: v}
 			tag = tag.Next
 		}
 	}
 	if index > 0 {
-		tag.Next =  &ListNode{Val: index}
+		tag.Next =  &algorithm.ListNode{Val: index}
 	}
 	return result
 }

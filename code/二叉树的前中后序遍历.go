@@ -1,5 +1,7 @@
 package main
 
+import algorithm "algorithm/const"
+
 /**
 给你二叉树的根节点 root ，返回它节点值的 前序 中序 后序 遍历。
         1
@@ -20,11 +22,11 @@ package main
 //思路：二叉树的遍历 基本的DFS(深度优先遍历) 分为递归和非递归. 这里分别用两种解法解题
 
 //前序遍历 递归方法
-func qianXuDiGui (root *TreeNode) []int {
+func qianXuDiGui (root *algorithm.TreeNode) []int {
 	//前序遍历 根——左——右
 	var r []int
-	var dfs func(*TreeNode)
-	dfs = func(node *TreeNode){
+	var dfs func(*algorithm.TreeNode)
+	dfs = func(node *algorithm.TreeNode){
 		if node == nil {
 			return
 		}
@@ -36,9 +38,9 @@ func qianXuDiGui (root *TreeNode) []int {
 	return r
 }
 //前序遍历 非递归
-func qianXuFeiDiGui (root *TreeNode) []int {
+func qianXuFeiDiGui (root *algorithm.TreeNode) []int {
 	//前序遍历 根——左——右 非递归，采用显示栈的方法，先将整个树的所有左孩子节点压入栈，利用栈的先进后出的原理
-	var stack []*TreeNode
+	var stack []*algorithm.TreeNode
 	var r []int
 	for root != nil || len(stack) > 0 {
 		for root != nil {
@@ -53,10 +55,10 @@ func qianXuFeiDiGui (root *TreeNode) []int {
 	return r
 }
 //中序遍历 递归
-func zhongXuDiGui(root *TreeNode) []int {
+func zhongXuDiGui(root *algorithm.TreeNode) []int {
 	var r []int
-	var dfs func(node *TreeNode)
-	dfs = func(node *TreeNode) {
+	var dfs func(node *algorithm.TreeNode)
+	dfs = func(node *algorithm.TreeNode) {
 		if node == nil {
 			return
 		}
@@ -67,8 +69,8 @@ func zhongXuDiGui(root *TreeNode) []int {
 	return r
 }
 //中序遍历 非递归
-func zhongXuFeiDiGui(root *TreeNode) []int {
-	var stack []*TreeNode
+func zhongXuFeiDiGui(root *algorithm.TreeNode) []int {
+	var stack []*algorithm.TreeNode
 	var r []int
 	for root != nil || len(stack) > 0 {
 		for root != nil {
@@ -83,10 +85,10 @@ func zhongXuFeiDiGui(root *TreeNode) []int {
 	return r
 }
 //后续遍历 递归
-func houXuDiGui(root *TreeNode) []int {
+func houXuDiGui(root *algorithm.TreeNode) []int {
 	var r []int
-	var dfs func(node *TreeNode)
-	dfs = func(node *TreeNode) {
+	var dfs func(node *algorithm.TreeNode)
+	dfs = func(node *algorithm.TreeNode) {
 		if node == nil {
 			return
 		}
@@ -97,10 +99,10 @@ func houXuDiGui(root *TreeNode) []int {
 	return r
 }
 //后序遍历 非递归
-func houXuFeiDiGui(root *TreeNode) []int {
-	var stack []*TreeNode
+func houXuFeiDiGui(root *algorithm.TreeNode) []int {
+	var stack []*algorithm.TreeNode
 	var r []int
-	var per *TreeNode
+	var per *algorithm.TreeNode
 	for root != nil || len(stack) > 0 {
 		for root != nil {
 			stack = append(stack,root)

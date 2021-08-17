@@ -1,5 +1,7 @@
 package main
 
+import algorithm "algorithm/const"
+
 //将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 // 示例 1：
 //输入：l1 = [1,2,4], l2 = [1,3,4]
@@ -7,9 +9,9 @@ package main
 // 示例 2：
 //输入：l1 = [], l2 = []
 //输出：[]
-func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+func mergeTwoLists(l1 *algorithm.ListNode, l2 *algorithm.ListNode) *algorithm.ListNode {
 	//思路：采用一个空余指针，指向合并后的链表的开头，这里将合并后的链表开头复制0 存放初始指针位置，之后分别比较两个链表的每一位，将小的内一位复制到合并链表的位置
-	pre := &ListNode{Val: 0}
+	pre := &algorithm.ListNode{Val: 0}
 	cur := pre
 	for l1 != nil || l2 != nil {
 		if l1 == nil {

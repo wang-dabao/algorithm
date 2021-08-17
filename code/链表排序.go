@@ -1,4 +1,7 @@
 package main
+
+import algorithm "algorithm/const"
+
 //给定链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。
 // 示例 1：
 //输入：head = [4,2,1,3]
@@ -8,11 +11,11 @@ package main
 //输出：[-1,0,3,4,5]
 
 
-func sortList(head *ListNode) *ListNode {
+func sortList(head *algorithm.ListNode) *algorithm.ListNode {
 	//思路:链表排序，核心思想是归并排序，把链表的每个节点，当做是最小的粒度，之后合并两个有序链表
 	//合并两个有序链表方法
-	merge := func(l1,l2 *ListNode) *ListNode{
-		pre := &ListNode{0,nil}
+	merge := func(l1,l2 *algorithm.ListNode) *algorithm.ListNode {
+		pre := &algorithm.ListNode{0,nil}
 		cur := pre
 		for l1 != nil && l2 != nil {
 			if l1.Val <= l2.Val {
@@ -34,8 +37,8 @@ func sortList(head *ListNode) *ListNode {
 	}
 
 	//排序..需要找到mid 分区点，这里就需要知道链表的中心点，可以用快慢指针
-	var sort func(head,tail *ListNode) *ListNode
-	sort = func(head, tail *ListNode) *ListNode {
+	var sort func(head,tail *algorithm.ListNode) *algorithm.ListNode
+	sort = func(head, tail *algorithm.ListNode) *algorithm.ListNode {
 		if head == nil  {
 			return head
 		}

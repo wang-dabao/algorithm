@@ -1,4 +1,7 @@
 package main
+
+import algorithm "algorithm/const"
+
 /**
 描述
 输入一个链表，反转链表后，输出新链表的表头。
@@ -10,7 +13,7 @@ package main
 {3,2,1}
  */
 
-func ReverseList(head *ListNode) *ListNode {
+func ReverseList(head *algorithm.ListNode) *algorithm.ListNode {
 	/**
 	思路： 反转列表嘛， 主要核心思想就是 三个指针 pre、 cur、 next  详细说下解题思路
 	pre: 指向新的链表的尾结点，（因为反转链表，我们遍历的是原始链表，那么最开始的数是反转后的链表的最后一位）初始是null
@@ -24,7 +27,7 @@ func ReverseList(head *ListNode) *ListNode {
 	当 cur = nil 了说明反转完成
 	 */
 	cur := head
-	var pre,next *ListNode
+	var pre,next *algorithm.ListNode
 	for cur != nil {
 		next = cur.Next
 		cur.Next = pre

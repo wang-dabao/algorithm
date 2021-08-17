@@ -1,5 +1,7 @@
 package main
 
+import algorithm "algorithm/const"
+
 /**
 输入一棵二叉树和一个整数，打印出二叉树中节点值的和为输入整数的所有路径。从树的根节点开始往下一直到叶节点所经过的节点形成一条路径。
 示例:
@@ -21,12 +23,12 @@ package main
 
 */
 
-func pathSum(root *TreeNode, targetSum int) [][]int {
+func pathSum(root *algorithm.TreeNode, targetSum int) [][]int {
 	//思路：dfs 深度优先遍历 并且用 tag 记录每一条路径的和，当等于目标值的时候，将路径放入二维数组中
 	var ret [][]int
-	var dfs func(*TreeNode,int)
+	var dfs func(*algorithm.TreeNode,int)
 	var path []int
-	dfs = func(root *TreeNode,tag int) {
+	dfs = func(root *algorithm.TreeNode,tag int) {
 		if root == nil {
 			return
 		}

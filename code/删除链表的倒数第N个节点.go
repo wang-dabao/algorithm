@@ -1,4 +1,7 @@
 package main
+
+import algorithm "algorithm/const"
+
 //给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
 // 进阶：你能尝试使用一趟扫描实现吗？
 // 示例 1：
@@ -16,8 +19,8 @@ package main
 // 1 <= n <= sz
 // Related Topics 链表 双指针
 
-func removeNthFromEnd(head *ListNode, n int) *ListNode {
-	pre := &ListNode{0,head}
+func removeNthFromEnd(head *algorithm.ListNode, n int) *algorithm.ListNode {
+	pre := &algorithm.ListNode{0,head}
 	cur := pre
 	for i := 0; i < getLength(head)-n; i++ {
 		cur = cur.Next
@@ -25,7 +28,7 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	cur.Next = cur.Next.Next
 	return pre.Next
 }
-func getLength(head *ListNode) int {
+func getLength(head *algorithm.ListNode) int {
 	length := 0
 	for head != nil {
 		head = head.Next

@@ -25,22 +25,21 @@ package main
 //lRUCache.get(3);    // 返回 3
 //lRUCache.get(4);    // 返回 4
 
-
-//双向链表 中的每一个节点的结构体
+// Node 双向链表 中的每一个节点的结构体
 type Node struct {
-	key,value int
-	prev,next *Node
+	key, value int
+	prev, next *Node
 }
 
-//双向链表结构体
+// DoubleList 双向链表结构体
 type DoubleList struct {
 	//虚拟头尾节点
-	head,tail *Node
-	size int
+	head, tail *Node
+	size       int
 }
 
 //在链表尾部添加节点node
-func (dl *DoubleList) addLast (node *Node) {
+func (dl *DoubleList) addLast(node *Node) {
 	//新加的node节点前指针 指向 链表的尾部的前指针。
 	node.prev = dl.tail.prev
 	node.next = dl.tail
@@ -50,14 +49,14 @@ func (dl *DoubleList) addLast (node *Node) {
 }
 
 //删除链表中的节点node 当put一个key存在value不同时，做的是先删除后添加的操作，这样新加的永远在队尾
-func (dl *DoubleList) remove (node *Node) {
+func (dl *DoubleList) remove(node *Node) {
 	node.prev.next = node.next
 	node.next.prev = node.prev
 	dl.size--
 }
 
 //删除链表第一个真实元素，并且返回该元素 这就是删除最近未使用的功能
-func (dl *DoubleList) removeFirst () *Node{
+func (dl *DoubleList) removeFirst() *Node {
 	if dl.head.next == dl.tail {
 		return nil
 	}
@@ -77,12 +76,12 @@ type LRUCache struct {
 
 func Constructor(capacity int) LRUCache {
 	lru := LRUCache{
-		cacheMap : map[int]*Node{},
+		cacheMap: map[int]*Node{},
 		cacheList: &DoubleList{
-			head: &Node{key: 0,value: 0}, //虚拟一个头节点
-			tail: &Node{key: 0,value: 0}, //虚拟一个尾结点
+			head: &Node{key: 0, value: 0}, //虚拟一个头节点
+			tail: &Node{key: 0, value: 0}, //虚拟一个尾结点
 		},
-		capacity:capacity,
+		capacity: capacity,
 	}
 	//把双向链表虚拟头尾节点 链接起来
 	lru.cacheList.head.next = lru.cacheList.tail
@@ -90,10 +89,9 @@ func Constructor(capacity int) LRUCache {
 	return lru
 }
 
-
 func (this *LRUCache) Get(key int) int {
 	//判断map中是否存在key
-	if node,ok := this.cacheMap[key]; ok {
+	if node, ok := this.cacheMap[key]; ok {
 		//存在的话，将这个节点变成最近使用过，也就是先删除，在放到队尾
 		this.cacheList.remove(node)
 		this.cacheList.addLast(node)
@@ -102,18 +100,17 @@ func (this *LRUCache) Get(key int) int {
 	return -1
 }
 
-
-func (this *LRUCache) Put(key int, value int)  {
+func (this *LRUCache) Put(key int, value int) {
 	//put复杂很多，如果key存在，那就删除之前的，将现在的放入队尾。如果不存在，需要插入队尾并判断容量
-	if node,ok := this.cacheMap[key]; ok {
+	if node, ok := this.cacheMap[key]; ok {
 		this.cacheList.remove(node)
 	}
 
 	if this.capacity == this.cacheList.size {
 		first := this.cacheList.removeFirst()
-		delete(this.cacheMap,first.key)
+		delete(this.cacheMap, first.key)
 	}
-	newNode := &Node{key:key,value:value}
+	newNode := &Node{key: key, value: value}
 	this.cacheList.addLast(newNode)
 	this.cacheMap[key] = newNode
 }

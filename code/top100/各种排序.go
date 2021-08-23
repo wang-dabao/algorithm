@@ -6,6 +6,8 @@ import "fmt"
 
 //排序的算法比较常见的有 冒泡排序 快速排序 归并排序 插入排序 堆排序
 
+//https://blog.csdn.net/bigbaochen/article/details/119611625
+
 //冒泡排序，就是双重for循环，俩俩比较相邻的元素
 func maopao(nums []int) []int {
 	swap := func(nums []int,i,j int) {

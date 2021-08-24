@@ -82,5 +82,5 @@ func isMatch(s string, p string) bool {
 }
 
 func main() {
-	fmt.Print(isMatch("a","c*a"))
+	fmt.Print(isMatch("","*"))
 }

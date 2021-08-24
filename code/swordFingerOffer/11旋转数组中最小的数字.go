@@ -14,7 +14,7 @@ package main
  */
 
 /**
-思路：暴力解的话就是白给，另一种就是二分法..
+思路：暴力解的话就是白给，另一种就是二分法..自己研究一下
  */
 
 func minArray(numbers []int) int {

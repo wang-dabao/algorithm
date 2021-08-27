@@ -22,13 +22,17 @@ dp数组 存储每段的最大值 dp[i] = max i是数组的长度 前提是dp[i]
  */
 
 func maxSubArray(nums []int) int {
+	var dp []int
+	dp = append(dp,nums[0])
 	max := nums[0]
 	for i := 1; i < len(nums); i++ {
-		if nums[i]+nums[i-1] > nums[i] {
-			nums[i] = nums[i]+nums[i-1]
+		if nums[i]+dp[i-1] > nums[i] {
+			dp = append(dp,nums[i]+dp[i-1])
+		}else {
+			dp = append(dp,nums[i])
 		}
-		if nums[i] > max {
-			max = nums[i]
+		if dp[i] > max {
+			max = dp[i]
 		}
 	}
 	return max

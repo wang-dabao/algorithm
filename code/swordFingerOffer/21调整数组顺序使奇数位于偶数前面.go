@@ -18,20 +18,20 @@ import "fmt"
  */
 
 func exchange(nums []int) []int {
-	start,end := 0,len(nums)-1
-	for start < end {
-		if nums[end] % 2 == 0 {
-			end--
+	head,tail := 0,len(nums)-1
+	for head < tail {
+		if nums[head]%2 == 1{
+			head++
 			continue
 		}
-		if nums[start] % 2 == 1 {
-			start++
+		if nums[tail]%2 == 0 {
+			tail--
 			continue
 		}
-		if nums[start] % 2 == 0 && nums[end] % 2 == 1 {
-			tmp := nums[end]
-			nums[end] = nums[start]
-			nums[start] = tmp
+		if nums[head]%2 == 0 && nums[tail]%2 == 1 {
+			nums[head], nums[tail] = nums[tail],nums[head]
+			head++
+			tail--
 		}
 	}
 	return nums

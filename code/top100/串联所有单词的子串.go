@@ -19,6 +19,13 @@ package main
 链接：https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words
  */
 
+/**
+思路：
+分析题，words的所有连续的排列组合是s的子字符串。那么也就是说，我们可以将s分割一下。利用滑动窗口的思想，窗口的大小应该是所有words数组中的单词组成的字符串（也就是子串应该有的长度）
+这样我们每一次将起始位置向后挪一个，移动窗口，直到尾结点到字符串的最后。这样就遍历完了所有的s字符串。
+再来看每一次窗口中的字符串处理，将窗口中的字符串分割成长度为len(word)的小段，将小段存储在map中，遍历map，如果和words中的元素一致，那就符合返回true
+ */
+
 func findSubstring(s string, words []string) []int {
 	wordsMap := make(map[string]int, len(words))
 	for i := 0; i < len(words); i++ {

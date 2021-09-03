@@ -30,3 +30,16 @@ func reverseLeftWords(s string, n int) string {
 	}
 	return string(nums)
 }
+
+func reverseLeftWordsv2(s string, n int) string {
+	stringLen := len(s)
+	if len(s) == 0 || n == 0 || n >= stringLen {
+		return s
+	}
+
+	var new string
+	new = s[n:]
+	sub := s[:n]
+	new = new + sub
+	return new
+}

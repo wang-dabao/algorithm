@@ -1,6 +1,6 @@
 package main
 
-import "sort"
+import "fmt"
 
 /**
 输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。
@@ -18,6 +18,39 @@ import "sort"
  */
 
 func getLeastNumbers(arr []int, k int) []int {
-	sort.Ints(arr) //排序
-	return arr[:k+1]
+	//快排，基准数
+	baseNumber := func(arr []int, left,right int) int{
+		start := left
+		left++
+		for left < right {
+			for left < right && arr[left] <= arr[start] {
+				left++
+				continue
+			}
+			for left < right && arr[right] > arr[start] {
+				right--
+				continue
+			}
+			arr[left],arr[right] = arr[right],arr[left]
+		}
+		if arr[right] > arr[start] {
+			right--
+		}
+		arr[start],arr[right] = arr[right],arr[start]
+		return right
+	}
+	var sort func(arr []int, left,right int)
+	sort = func(arr []int, left, right int) {
+		if left < right {
+			index := baseNumber(arr, left, right)
+			sort(arr,left,index-1)
+			sort(arr,index+1,right)
+		}
+	}
+	sort(arr,0,len(arr)-1)
+	return arr[:k]
+}
+
+func main() {
+	fmt.Println(getLeastNumbers([]int{0,1,2,1},2))
 }

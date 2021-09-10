@@ -31,18 +31,19 @@ import algorithm "algorithm/const"
  */
 func copyRandomList(head *algorithm.Node) *algorithm.Node {
 	chacheMap := make(map[*algorithm.Node]*algorithm.Node)
-	var deepcopy func(head *algorithm.Node) *algorithm.Node
-	deepcopy = func(head *algorithm.Node) *algorithm.Node {
-		if head == nil {
+
+	var deepcopy func(oldnode *algorithm.Node) *algorithm.Node
+	deepcopy = func(oldnode *algorithm.Node) *algorithm.Node {
+		if oldnode == nil {
 			return nil
 		}
-		if value,ok := chacheMap[head]; ok {
+		if value,ok := chacheMap[oldnode]; ok {
 			return value
 		}
-		newNode := &algorithm.Node{Val: head.Val}
-		chacheMap[head] = newNode
-		newNode.Next = deepcopy(head.Next)
-		newNode.Random = deepcopy(head.Random)
+		newNode := &algorithm.Node{Val: oldnode.Val}
+		chacheMap[oldnode] = newNode
+		newNode.Next = deepcopy(oldnode.Next)
+		newNode.Random = deepcopy(oldnode.Random)
 	    return newNode
 	}
 	return deepcopy(head)

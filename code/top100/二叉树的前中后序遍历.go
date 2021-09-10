@@ -49,9 +49,9 @@ func qianXuFeiDiGui(root *algorithm.TreeNode) []int {
 			stack = append(stack, root)
 			root = root.Left
 		}
-		root = stack[len(stack)-1]
+		node := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
-		root = root.Right
+		root = node.Right
 	}
 	return r
 }
@@ -80,10 +80,10 @@ func zhongXuFeiDiGui(root *algorithm.TreeNode) []int {
 			stack = append(stack, root)
 			root = root.Left
 		}
-		root = stack[len(stack)-1]
+		node := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
-		r = append(r, root.Val)
-		root = root.Right
+		r = append(r, node.Val)
+		root = node.Right
 	}
 	return r
 }
@@ -113,15 +113,15 @@ func houXuFeiDiGui(root *algorithm.TreeNode) []int {
 			stack = append(stack, root)
 			root = root.Left
 		}
-		root = stack[len(stack)-1]
+		node := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
-		if root.Right == nil || root.Right == per {
+		if node.Right == nil || node.Right == per {
 			r = append(r, root.Val)
-			per = root
+			per = node
 			root = nil
 		} else {
-			stack = append(stack, root)
-			root = root.Right
+			stack = append(stack, node)
+			root = node.Right
 		}
 	}
 	return r

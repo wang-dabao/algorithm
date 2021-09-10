@@ -1,6 +1,8 @@
 package main
 
-import algorithm "algorithm/const"
+import (
+	"algorithm/code/const"
+)
 
 /**
 输入两个链表，找出它们的第一个公共节点。

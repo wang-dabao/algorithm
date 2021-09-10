@@ -1,7 +1,7 @@
 package main
 
 import (
-	algorithm "algorithm/const"
+	"algorithm/code/const"
 )
 
 /**

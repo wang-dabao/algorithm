@@ -1,6 +1,8 @@
 package main
 
-import algorithm "algorithm/const"
+import (
+	"algorithm/code/const"
+)
 
 /**
 描述

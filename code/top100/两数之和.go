@@ -23,6 +23,10 @@ import "fmt"
 // 进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？
 // Related Topics 数组 哈希表
 
+/**
+还有一种双指针的方法，先给数组拍个序，之后一个头指针，一个尾部指针，相加如果大于目标值，尾指针移动，反之头指针移动
+ */
+
 func twoSum(nums []int, target int) []int {
 	//思路：hash表去做，准备一个map 如果目标值 target - nums[i] 在map不存在 那么将nums[i] 存到 map中 key是值，value是角标 这样当map中存在的话，当前值和map存储的值相加等于目标值
 	valueMap := make(map[int]int)

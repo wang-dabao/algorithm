@@ -7,7 +7,7 @@ sync.Map 的实现原理可概括为：
 1. 通过 read 和 dirty 两个字段将读写分离，读的数据存在只读字段 read 上，将最新写入的数据则存在 dirty 字段上
 2. 读取时会先查询 read，不存在再查询 dirty，写入时则只写入 dirty
 3. 读取 read 并不需要加锁，而读或写 dirty 都需要加锁
-4. 另外有 misses 字段来统计 read 被穿透的次数（被穿透指需要读 dirty 的情况），超过一定次数则将 dirty 数据同步到 read 上
+4. 另外有 misses 字段来统计 read 被穿透的次数（被穿透指需要读 dirty 的情况），超过一定次数（超过len(dirty)长度）则将 dirty 数据同步到 read 上
 5. 对于删除数据则直接通过标记来延迟删除
 
 ### 数据结构
@@ -25,9 +25,14 @@ type Map struct {
 }
 ```
 Map 常用的有以下方法：
-Load：读取指定 key 返回 value
+Load：读取指定 key 返回 value; 先从read中读取数据，读不到，再通过互斥锁从dirty读数据。
+
 Store： 存储（增或改）key-value
-Delete： 删除指定 key
+如果read中包含该key, 说明是更新操作，更新read中的该值即可。
+如果read中不存在，需要加锁访问dirty,如果dirty中存在该key,执行加锁更新；否则就是一个新key, 加锁添加到dirty中，并在read中标记 amended为true, 说明dirty中有该元素，而read中不包含；
+
+Delete： 删除指定 key。如果 key 在 read 中，就将值置成 nil；如果在 dirty 中，直接删除 key。
+
 
 2. readonly 数据结构
 ```go

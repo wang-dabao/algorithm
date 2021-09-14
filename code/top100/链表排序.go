@@ -17,6 +17,7 @@ func sortList(head *algorithm.ListNode) *algorithm.ListNode {
 	//思路:链表排序，核心思想是归并排序，把链表的每个节点，当做是最小的粒度，之后合并两个有序链表
 	//合并两个有序链表方法
 	merge := func(l1,l2 *algorithm.ListNode) *algorithm.ListNode {
+		//定义2个指针
 		pre := &algorithm.ListNode{0,nil}
 		cur := pre
 		for l1 != nil && l2 != nil {
@@ -46,10 +47,10 @@ func sortList(head *algorithm.ListNode) *algorithm.ListNode {
 		}
 		//这是为什么呢？ 主要是因为区间的确认是左闭右开的，不包括tail的
 		if head.Next == tail  {
-			head.Next = nil
+			head.Next = nil	//mark： 特别注意这个处理，将大单链表拆分成小的单链表
 			return head
 		}
-		//快慢指针找中间值
+		//快慢指针找中间值：左指针每次向后移1个位置；右指针移2个位置（直到尾结点）；
 		left,right := head,head
 		for right != tail {
 			left = left.Next
@@ -61,6 +62,7 @@ func sortList(head *algorithm.ListNode) *algorithm.ListNode {
 		mid := left
 		return merge(sort(head,mid),sort(mid,tail))
 	}
+
 	return sort(head,nil)
 }
 

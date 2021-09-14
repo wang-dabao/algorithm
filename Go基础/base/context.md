@@ -51,6 +51,11 @@ context.WithCancel 函数能够从 context.Context 中衍生出一个新的子�
 context.WithDeadline 和 context.WithTimeout 也都能创建可以被取消的计时器上下文 context.timerCtx：
 context.WithDeadline 在创建 context.timerCtx 的过程中判断了父上下文的截止日期与当前日期，并通过 time.AfterFunc 创建定时器，当时间超过了截止日期后会调用 context.timerCtx.cancel 同步取消信号。
 
+
+* cancel方法
+cancel() 方法的功能就是关闭 channel：c.done；递归地取消它的所有子节点；从父节点从删除自己。
+达到的效果是通过关闭 channel，将取消信号传递给了它的所有子节点。goroutine 接收到取消信号的方式就是 select 语句中的读 c.done 被选中。
+
 #### 传值方法
 context.WithValue 能从父上下文中创建一个子上下文，传值的子上下文使用 context.valueCtx 类型：
 ```

@@ -47,7 +47,7 @@ func sortList(head *algorithm.ListNode) *algorithm.ListNode {
 		}
 		//这是为什么呢？ 主要是因为区间的确认是左闭右开的，不包括tail的
 		if head.Next == tail  {
-			head.Next = nil	//mark： 特别注意这个处理，将大单链表拆分成小的单链表
+			head.Next = nil
 			return head
 		}
 		//快慢指针找中间值：左指针每次向后移1个位置；右指针移2个位置（直到尾结点）；

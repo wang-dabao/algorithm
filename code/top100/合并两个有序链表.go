@@ -2,15 +2,17 @@ package main
 
 import (
 	"algorithm/code/const"
+	"encoding/json"
+	"fmt"
 )
 
-//将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+// 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 // 示例 1：
-//输入：l1 = [1,2,4], l2 = [1,3,4]
-//输出：[1,1,2,3,4,4]
+// 输入：l1 = [1,2,4], l2 = [1,3,4]
+// 输出：[1,1,2,3,4,4]
 // 示例 2：
-//输入：l1 = [], l2 = []
-//输出：[]
+// 输入：l1 = [], l2 = []
+// 输出：[]
 func mergeTwoLists(l1 *algorithm.ListNode, l2 *algorithm.ListNode) *algorithm.ListNode {
 	//思路：采用一个空余指针，指向合并后的链表的开头，这里将合并后的链表开头复制0 存放初始指针位置，之后分别比较两个链表的每一位，将小的内一位复制到合并链表的位置
 	pre := &algorithm.ListNode{Val: 0}
@@ -29,7 +31,7 @@ func mergeTwoLists(l1 *algorithm.ListNode, l2 *algorithm.ListNode) *algorithm.Li
 			cur.Next = l1
 			l1 = l1.Next
 			cur = cur.Next
-		}else {
+		} else {
 			cur.Next = l2
 			l2 = l2.Next
 			cur = cur.Next
@@ -39,3 +41,25 @@ func mergeTwoLists(l1 *algorithm.ListNode, l2 *algorithm.ListNode) *algorithm.Li
 	return pre.Next
 }
 
+func main() {
+	l1 := &algorithm.ListNode{
+		Val: 1,
+		Next: &algorithm.ListNode{
+			Val: 2,
+			Next: &algorithm.ListNode{
+				Val: 4,
+			},
+		},
+	}
+	l2 := &algorithm.ListNode{
+		Val: 1,
+		Next: &algorithm.ListNode{
+			Val: 3,
+			Next: &algorithm.ListNode{
+				Val: 4,
+			},
+		},
+	}
+	marshal, _ := json.Marshal(mergeTwoLists(l1, l2))
+	fmt.Printf("%+v", string(marshal))
+}

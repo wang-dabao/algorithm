@@ -37,13 +37,13 @@ func threeSum(nums []int) [][]int {
 		c := lenght - 1
 		//b 指向a后面一位，也就是首段，这时b、c形成一个双指针，按照规则移动指针，循环为啥是b<c呢。因为bc重合后就没有继续下去的意义了
 		for b := a + 1; b < c; b++ {
-			if b > a + 1 && nums[b] == nums[b-1] {
+			if b > a+1 && nums[b] == nums[b-1] {
 				continue
 			}
-			for b < c && nums[b] + nums[c] > -1*nums[a] {
+			for b < c && nums[b]+nums[c] > -1*nums[a] {
 				c--
 			}
-			if b < c && nums[b] + nums[c] == -1*nums[a] {
+			if b < c && nums[b]+nums[c] == -1*nums[a] {
 				result = append(result, []int{nums[a], nums[b], nums[c]})
 			}
 		}
@@ -52,5 +52,5 @@ func threeSum(nums []int) [][]int {
 }
 
 func main() {
-	fmt.Print(threeSum([]int{-1,0,1,2,-1,-4}))
+	fmt.Print(threeSum([]int{-1, 0, 1, 2, -1, -4}))
 }
